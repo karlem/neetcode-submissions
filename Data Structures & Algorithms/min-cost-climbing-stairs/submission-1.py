@@ -1,0 +1,16 @@
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        l = len(cost)
+        cache = {}
+
+        def dfs(i):
+            if i > l - 1:
+                return 0
+            
+            if i in cache:
+                return cache[i]
+            
+            cache[i] = cost[i] + min(dfs(i+1), dfs(i+2))
+            return cache[i]
+
+        return min(dfs(0), dfs(1))
